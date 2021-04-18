@@ -56,7 +56,16 @@ class _HomeScreenState extends State<HomeScreen> {
         slivers: [
           SliverToBoxAdapter(
             child: ContentHeader(featuredContent: sintelContent),
-          )
+          ),
+          SliverPadding(
+            padding: EdgeInsets.only(top: 20),
+            sliver: SliverToBoxAdapter(
+              child: Previews(
+                title: "Previews",
+                contentList: previews,
+              ),
+            ),
+          ),
         ],
       ),
     );
