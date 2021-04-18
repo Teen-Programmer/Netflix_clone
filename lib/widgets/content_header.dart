@@ -64,7 +64,8 @@ class _PlayButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.fromLTRB(15, 5, 20, 5.0),
+      width: 130,
+      padding: const EdgeInsets.all(0),
       child: TextButton.icon(
           label: Text(
             'Play',
