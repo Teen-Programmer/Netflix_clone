@@ -1,10 +1,16 @@
 import 'package:flutter/material.dart';
+import '../widgets/responsive.dart';
 import 'package:flutter_netflix_responsive_ui/Screens/home_screen.dart';
 
 class NavScreen extends StatefulWidget {
   @override
   _NavScreenState createState() => _NavScreenState();
 }
+
+///todo: have to remove this global initialisation for home screen appbar offset variable to bloc ///
+///now it is the simple fix that i can get b xD ///
+double scrollOffset = 0.0; //For HomeScreen appbar blackening effect///
+///HomeScreen Stuff end///
 
 class _NavScreenState extends State<NavScreen> {
   List<Widget> _screens = [
@@ -31,35 +37,37 @@ class _NavScreenState extends State<NavScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: _screens[_currentIndex],
-      bottomNavigationBar: BottomNavigationBar(
-        type: BottomNavigationBarType.fixed,
-        backgroundColor: Colors.black,
-        items: _icons
-            .map(
-              (title, icon) => MapEntry(
-                title,
-                BottomNavigationBarItem(
-                  icon: Icon(
-                    icon,
-                    size: 30.0,
-                  ),
-                  label: title,
-                ),
-              ),
+      bottomNavigationBar: !Responsive.isDesktop(context)
+          ? BottomNavigationBar(
+              type: BottomNavigationBarType.fixed,
+              backgroundColor: Colors.black,
+              items: _icons
+                  .map(
+                    (title, icon) => MapEntry(
+                      title,
+                      BottomNavigationBarItem(
+                        icon: Icon(
+                          icon,
+                          size: 30.0,
+                        ),
+                        label: title,
+                      ),
+                    ),
+                  )
+                  .values
+                  .toList(),
+              currentIndex: _currentIndex,
+              selectedFontSize: 11.0,
+              selectedItemColor: Colors.white,
+              unselectedItemColor: Colors.grey,
+              unselectedFontSize: 11.0,
+              onTap: (index) {
+                setState(() {
+                  _currentIndex = index;
+                });
+              },
             )
-            .values
-            .toList(),
-        currentIndex: _currentIndex,
-        selectedFontSize: 11.0,
-        selectedItemColor: Colors.white,
-        unselectedItemColor: Colors.grey,
-        unselectedFontSize: 11.0,
-        onTap: (index) {
-          setState(() {
-            _currentIndex = index;
-          });
-        },
-      ),
+          : null,
     );
   }
 }

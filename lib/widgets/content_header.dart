@@ -8,6 +8,85 @@ class ContentHeader extends StatelessWidget {
   const ContentHeader({Key key, this.featuredContent}) : super(key: key);
   @override
   Widget build(BuildContext context) {
+    return Responsive(
+      mobile: _ContentHeaderMobile(featuredContent: featuredContent),
+      desktop: _ContentHeaderDesktop(featuredContent: featuredContent),
+    );
+  }
+}
+
+class _ContentHeaderDesktop extends StatefulWidget {
+  final Content featuredContent;
+
+  const _ContentHeaderDesktop({Key key, this.featuredContent})
+      : super(key: key);
+  @override
+  __ContentHeaderDesktopState createState() => __ContentHeaderDesktopState();
+}
+
+class __ContentHeaderDesktopState extends State<_ContentHeaderDesktop> {
+  @override
+  Widget build(BuildContext context) {
+    return Stack(
+      alignment: Alignment.center,
+      children: <Widget>[
+        Container(
+          height: 500,
+          decoration: BoxDecoration(
+            image: DecorationImage(
+                image: AssetImage(widget.featuredContent.imageUrl),
+                fit: BoxFit.cover),
+          ),
+        ),
+        Container(
+          height: 500,
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+                begin: Alignment.bottomCenter,
+                end: Alignment.topCenter,
+                colors: [Colors.black, Colors.transparent]),
+          ),
+        ),
+        Positioned(
+          bottom: 110,
+          child: SizedBox(
+            width: 250,
+            child: Image.asset(widget.featuredContent.titleImageUrl),
+          ),
+        ),
+        Positioned(
+          left: 0,
+          right: 0,
+          bottom: 40,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: <Widget>[
+              VerticalIconButton(
+                icon: Icons.add,
+                title: 'list',
+                onTap: () => print("My List"),
+              ),
+              _PlayButton(),
+              VerticalIconButton(
+                icon: Icons.info_outline,
+                title: 'info',
+                onTap: () => print("Info"),
+              ),
+            ],
+          ),
+        ),
+      ],
+    );
+  }
+}
+
+class _ContentHeaderMobile extends StatelessWidget {
+  final Content featuredContent;
+
+  const _ContentHeaderMobile({Key key, this.featuredContent}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
     return Stack(
       alignment: Alignment.center,
       children: <Widget>[
@@ -65,6 +144,7 @@ class _PlayButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: 130,
+      height: 40,
       padding: const EdgeInsets.all(0),
       child: TextButton.icon(
           label: Text(

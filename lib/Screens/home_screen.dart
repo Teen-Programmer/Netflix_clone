@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import './nav_screen.dart';
 import 'package:flutter_netflix_responsive_ui/data/data.dart';
 import '../widgets/widgets_directory.dart';
 
@@ -9,7 +10,6 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  double _scrollOffset = 0.0;
   ScrollController _scrollController;
 
   @override
@@ -17,10 +17,9 @@ class _HomeScreenState extends State<HomeScreen> {
     _scrollController = new ScrollController()
       ..addListener(() {
         setState(() {
-          _scrollOffset = _scrollController.offset;
+          scrollOffset = _scrollController.offset;
         });
       });
-
     super.initState();
   }
 
@@ -39,7 +38,7 @@ class _HomeScreenState extends State<HomeScreen> {
       appBar: PreferredSize(
         preferredSize: Size(screenSize.width, 50),
         child: CustomAppBar(
-          scrollOffset: _scrollOffset,
+          scrollOffset: scrollOffset,
         ),
       ),
       floatingActionButton: FloatingActionButton(
