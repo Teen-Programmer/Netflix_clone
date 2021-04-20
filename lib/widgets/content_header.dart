@@ -126,7 +126,9 @@ class __ContentHeaderDesktopState extends State<_ContentHeaderDesktop> {
                     TextButton.icon(
                       style: ButtonStyle(
                         padding: MaterialStateProperty.all(
-                            EdgeInsets.symmetric(horizontal: 20.0)),
+                          EdgeInsets.symmetric(
+                              horizontal: 20.0, vertical: 11.0),
+                        ),
                         backgroundColor:
                             MaterialStateProperty.all(Colors.white),
                       ),
